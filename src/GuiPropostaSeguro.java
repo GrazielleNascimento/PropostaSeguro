@@ -197,6 +197,11 @@ public class GuiPropostaSeguro extends javax.swing.JFrame {
 
         btnLimpar.setText("Limpar");
         btnLimpar.setEnabled(false);
+        btnLimpar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLimparActionPerformed(evt);
+            }
+        });
 
         btnSair.setText("Sair");
         btnSair.addActionListener(new java.awt.event.ActionListener() {
@@ -345,6 +350,35 @@ public class GuiPropostaSeguro extends javax.swing.JFrame {
         btnLimpar.setEnabled(true);
          // botao limpar habilitado
     }//GEN-LAST:event_btnCalcularActionPerformed
+
+    private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
+         //limpando as labels
+        lblDescIdade.setText(null);
+        lblDescPerfil.setText(null);
+        lblDescSexo.setText(null);
+        lblValorBaseSeguro.setText(null);
+        lblValorSeguro.setText(null);
+
+        //limpando os campos text
+        txtNome.setText(null);
+        txtValorCarro.setText(null);
+
+        //limpando as seleçoes do radioButton
+        rdbFeminino.setSelected(false);
+        rdbMasculino.setSelected(true);
+
+        //Voltando para a fase inicial
+        cbxFaixaIdade.setSelectedIndex(0);
+
+        //tirando a seleção do perfil
+        chkUnicoMotorista.setSelected(false);
+        chkCidade.setSelected(false);
+
+        //apos limpar desabilita o botao de limpar e habilita o de calcular
+        btnCalcular.setEnabled(true);
+        btnLimpar.setEnabled(false);
+        // habilitado botao de calcular 
+    }//GEN-LAST:event_btnLimparActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
