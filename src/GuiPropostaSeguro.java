@@ -189,6 +189,11 @@ public class GuiPropostaSeguro extends javax.swing.JFrame {
         jPanel3Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {lblDescIdade, lblDescPerfil, lblDescSexo, lblValorBaseSeguro, lblValorSeguro});
 
         btnCalcular.setText("Calcular");
+        btnCalcular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularActionPerformed(evt);
+            }
+        });
 
         btnLimpar.setText("Limpar");
         btnLimpar.setEnabled(false);
@@ -285,6 +290,61 @@ public class GuiPropostaSeguro extends javax.swing.JFrame {
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSairActionPerformed
         dispose();
     }//GEN-LAST:event_btnSairActionPerformed
+
+    private void btnCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularActionPerformed
+        //calculo do valor base --- 10% do valor total
+        double valorBase = 0.10 * Double.parseDouble(txtValorCarro.getText());
+
+        //calculo do desconto do sexo
+        double descSexo = 0;
+
+        //se for feminino tem desconto de 7,5%
+        if(rdbFeminino.isSelected()){
+            descSexo = 0.075 * valorBase;
+
+        }
+
+        //desconto faixa de idade
+        double descIdade=0;
+
+        //desconto da faixa etaria de 26 a 35 anos
+        if(cbxFaixaIdade.getSelectedIndex() == 1){
+
+            descIdade = 0.025 * valorBase;
+        }
+        //desconto da faixa etaria acima dos 35 anos
+        else if(cbxFaixaIdade.getSelectedIndex() == 2){
+            descIdade = 0.037 * valorBase;
+        }
+
+        //Desconto Perfil de Motorista
+        double descPerfil = 0;
+
+        //desconto motorista unico
+        if(chkUnicoMotorista.isSelected()){
+            descPerfil = descPerfil +  0.015  * valorBase;
+        }
+
+        //desconto motorista cidade
+        if(chkCidade.isSelected()){
+            descPerfil =  descPerfil +  0.018 * valorBase;
+        }
+
+        // calculo do total do seguro
+        double valorSeguro = valorBase - (descSexo + descIdade + descPerfil);
+
+        //setando os valores nas labels
+        lblValorBaseSeguro.setText(String.valueOf(valorBase));
+        lblDescSexo.setText(String.valueOf(descSexo));
+        lblDescIdade.setText(String.valueOf(descIdade));
+        lblDescPerfil.setText(String.valueOf(descPerfil));
+        lblValorSeguro.setText(String.valueOf(valorSeguro));
+
+        //Desabilitando o botão de calcular e habilitando o de limpar
+        btnCalcular.setEnabled(false);
+        btnLimpar.setEnabled(true);
+         // botao limpar habilitado
+    }//GEN-LAST:event_btnCalcularActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
